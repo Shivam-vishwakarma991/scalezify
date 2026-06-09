@@ -16,12 +16,7 @@ export function Founder() {
             transition={{ duration: 0.6 }}
             className="order-2 lg:order-1 relative aspect-[4/5] rounded-2xl overflow-hidden bg-gray-800"
           >
-            {/* Placeholder for Yash Pal's photo */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 border border-gray-700 m-4 rounded-xl border-dashed">
-              <span className="text-[#FFB800] text-6xl mb-4">📸</span>
-              <p className="text-gray-400 font-medium">[Founder Photo Placeholder]</p>
-              <p className="text-sm text-gray-500 mt-2">Minimum 800x1000px, high quality</p>
-            </div>
+            <img src="/yashPal.jpeg" alt="Yash Pal - Founder of Scalezify" className="absolute inset-0 w-full h-full object-cover" />
           </motion.div>
 
           <motion.div 

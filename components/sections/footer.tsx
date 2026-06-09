@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/constants/site";
 
 export function Footer() {
@@ -7,16 +8,14 @@ export function Footer() {
     <footer className="bg-[#0D1040] text-white py-12 md:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
-          
+
           <div className="md:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded bg-[#FFB800] flex items-center justify-center font-bold text-[#0D1040]">S</div>
-              <span className="text-2xl font-heading font-bold tracking-tight">
-                <span className="text-white">Scale</span>
-                <span className="text-[#FFB800]">zify</span>
-              </span>
+              <div className="relative w-48 h-16">
+                <Image src="/logo.png" alt="Scalezify Logo" fill className="object-contain object-left" />
+              </div>
             </Link>
-            <p className="text-gray-400 max-w-sm">
+            <p className="text-gray-400 max-w-sm mt-4">
               Growth. Precision. Luxury. <br />
               {siteConfig.description}
             </p>

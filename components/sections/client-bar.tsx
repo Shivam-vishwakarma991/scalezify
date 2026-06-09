@@ -5,10 +5,13 @@ import { motion } from "framer-motion";
 
 const clients = [
   "Maybach Car Rental",
-  "Lohith Luxury Cars",
+  "Rent Luxury Cars Mumbai",
+  "Lohith Luxury Cars Bengaluru",
   "Aravind Luxuria",
   "My Citi Tours",
-  "Adventure Atlas"
+  "Adventure Atlas",
+  "Kamala Express",
+  "Sunvenus Luxury Cars"
 ];
 
 export function ClientBar() {

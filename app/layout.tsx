@@ -16,6 +16,9 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Scalezify | India's Dedicated Growth Agency for Luxury Travel & Transportation",
   description: "We help premium travel and transportation brands generate direct leads, reduce aggregator dependency, and scale revenue — with Google Ads, Meta Ads, SEO, and full-funnel digital strategy.",
+  icons: {
+    icon: "/favIcon.png",
+  },
 };
 
 export default function RootLayout({

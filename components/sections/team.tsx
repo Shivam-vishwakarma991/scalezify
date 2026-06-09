@@ -7,7 +7,7 @@ export function Team() {
   return (
     <section className="py-24 bg-white border-t border-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl text-center">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -21,7 +21,7 @@ export function Team() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -30,10 +30,10 @@ export function Team() {
         >
           {[
             { role: "Paid Media (Google & Meta Ads)", count: "2 specialists" },
-            { role: "SEO & Organic Growth", count: "1 specialist" },
-            { role: "Creative & Design", count: "1 specialist" },
-            { role: "Web Development", count: "1 specialist" },
-            { role: "Social Media", count: "1 specialist" }
+            { role: "SEO & Organic Growth", count: "3 specialist" },
+            { role: "Creative & Design", count: "3 specialist" },
+            { role: "Web Development", count: "3 specialist" },
+            { role: "Social Media", count: "2 specialist" }
           ].map((member, index) => (
             <div key={index} className="bg-[#F4F6FF] rounded-2xl p-6 text-center border border-gray-100 hover:border-[#1B2080]/20 hover:shadow-md transition-all">
               <div className="w-12 h-12 mx-auto bg-white rounded-full flex items-center justify-center text-[#1B2080] font-bold shadow-sm mb-4">

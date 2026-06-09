@@ -5,8 +5,8 @@ export const siteConfig = {
   founder: "Yash Pal",
   location: "Bhopal, India",
   contact: {
-    email: "hello@scalezify.com",
-    whatsapp: "+91XXXXXXXXXX", // TODO: Replace with real number
+    email: "business.yashpal14@gmail.com",
+    whatsapp: "+91 93028 26081",
     calendly: "https://calendly.com/scalezify/strategy", // TODO: Replace with real link
   },
   links: {

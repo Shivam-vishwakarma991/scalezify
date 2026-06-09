@@ -47,13 +47,14 @@ export function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative h-full min-h-[400px] rounded-2xl overflow-hidden bg-[#1B2080] flex items-center justify-center p-12"
+            className="relative h-full min-h-[400px] rounded-2xl overflow-hidden shadow-2xl"
           >
-            {/* Geometric abstract graphic or large S-mark placeholder */}
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
-            <div className="relative z-10 w-48 h-48 rounded-2xl bg-gradient-to-tr from-[#FFB800] to-yellow-300 flex items-center justify-center shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-500">
-              <span className="text-8xl font-bold text-[#0D1040] font-heading">S</span>
-            </div>
+            <img 
+              src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=2000" 
+              alt="Luxury Car Rental Strategy" 
+              className="absolute inset-0 w-full h-full object-cover" 
+            />
+            <div className="absolute inset-0 bg-[#0D1040]/20"></div>
           </motion.div>
 
         </div>

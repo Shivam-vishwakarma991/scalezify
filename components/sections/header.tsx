@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/constants/site";
 import { SearchModal } from "@/components/search/search-modal";
+import { services } from "@/constants/data";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,39 +33,54 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          isScrolled ? "bg-[#0D1040]/90 backdrop-blur-md py-4 shadow-md" : "bg-[#0D1040] md:bg-transparent py-4 md:py-6"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? "bg-[#0D1040]/90 backdrop-blur-md py-4 shadow-md" : "bg-[#0D1040] md:bg-transparent py-4 md:py-6"
+          }`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2 z-50">
-              {/* S-mark icon placeholder */}
-              <div className="w-8 h-8 rounded bg-[#FFB800] flex items-center justify-center font-bold text-[#0D1040]">S</div>
-              <span className="text-xl font-heading font-bold tracking-tight">
-                <span className="text-white md:text-[#1B2080] md:dark:text-white transition-colors">Scale</span>
-                <span className="text-[#FFB800]">zify</span>
-              </span>
+              <div className="relative w-48 h-12 flex items-center">
+                <Image
+                  src="/logo.png"
+                  alt="Scalezify Logo"
+                  fill
+                  className="object-contain object-left"
+                />
+              </div>
             </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-8">
               <ul className="flex items-center gap-6">
                 {navLinks.map((link) => (
-                  <li key={link.label}>
+                  <li key={link.label} className="relative group py-4">
                     <Link
                       href={link.href}
-                      className={`text-sm font-medium transition-colors hover:text-[#FFB800] ${
-                        isScrolled ? "text-white" : "text-gray-900 md:text-white"
-                      }`}
+                      className={`text-sm font-medium transition-colors hover:text-[#FFB800] ${isScrolled ? "text-white" : "text-gray-900 md:text-white"
+                        }`}
                     >
                       {link.label}
                     </Link>
+                    {link.label === "Services" && (
+                      <div className="absolute left-0 top-full mt-0 w-64 rounded-xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+                        <div className="py-2">
+                          {services.map((service) => (
+                            <Link
+                              key={service.slug}
+                              href={`/services/${service.slug}`}
+                              className="block px-6 py-3 text-sm text-gray-700 hover:bg-[#F4F6FF] hover:text-[#1B2080] font-medium transition-colors"
+                            >
+                              {service.title}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </li>
                 ))}
               </ul>
               <div className="flex items-center gap-4">
-                <button 
+                <button
                   onClick={() => setIsSearchOpen(true)}
                   className={`p-2 rounded-full transition-colors hover:bg-white/10 ${isScrolled ? "text-white" : "text-gray-900 md:text-white"}`}
                   aria-label="Search"
@@ -80,7 +97,7 @@ export function Header() {
 
             {/* Mobile Actions */}
             <div className="flex items-center gap-4 md:hidden z-50">
-              <button 
+              <button
                 onClick={() => setIsSearchOpen(true)}
                 className="p-2 text-white hover:text-[#FFB800]"
                 aria-label="Search"
@@ -99,9 +116,8 @@ export function Header() {
 
         {/* Mobile Menu Overlay */}
         <div
-          className={`fixed inset-0 bg-[#0D1040] flex flex-col items-center justify-center transition-transform duration-300 z-40 md:hidden ${
-            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`fixed inset-0 bg-[#0D1040] flex flex-col items-center justify-center transition-transform duration-300 z-40 md:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            }`}
         >
           <ul className="flex flex-col items-center gap-8 text-2xl font-heading font-semibold text-white">
             {navLinks.map((link) => (

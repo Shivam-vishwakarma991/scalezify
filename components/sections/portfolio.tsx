@@ -1,165 +1,66 @@
 "use client";
 
-import React, { useRef, useCallback } from "react";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { portfolio } from "@/constants/data";
 
-function TiltCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const rotateX = ((y - cy) / cy) * -6;
-    const rotateY = ((x - cx) / cx) * 6;
-    cardRef.current.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    if (!cardRef.current) return;
-    cardRef.current.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
-  }, []);
-
-  return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={`tilt-card ${className}`}
-      style={{ transition: "transform 0.15s ease-out" }}
-    >
-      {children}
-    </div>
-  );
-}
-
 export function Portfolio() {
-  const headingRef = useRef(null);
-  const isInView = useInView(headingRef, { once: true, margin: "-80px" });
-
   return (
-    <section id="work" className="py-28 bg-[#060B2E] relative overflow-hidden">
-      {/* Subtle vertical light bands */}
-      <div className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          backgroundImage: "linear-gradient(90deg, rgba(27,32,128,0.08) 1px, transparent 1px)",
-          backgroundSize: "120px 100%",
-        }}
-      />
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-
-        <div ref={headingRef} className="mb-16 max-w-3xl">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4 }}
-            className="text-xs font-bold text-[#FFB800] uppercase tracking-[0.25em] mb-3 block"
-          >
-            Our Work
-          </motion.span>
-          <div className="overflow-hidden">
-            <motion.h2
-              initial={{ y: "100%", opacity: 0 }}
-              animate={isInView ? { y: "0%", opacity: 1 } : {}}
-              transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-white leading-tight mb-4"
-            >
-              Campaigns That Convert.<br />
-              <span className="text-gray-500">Brands That Grow.</span>
-            </motion.h2>
+    <section id="work" className="soft-section-frame section-frame relative overflow-hidden bg-[var(--surface-soft)] text-[#111111]">
+      <div className="absolute inset-0 soft-grid opacity-60" />
+      <div className="relative z-10 mx-auto max-w-[1600px] px-4 py-24 sm:px-6 lg:px-10">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
+        >
+          <div className="max-w-3xl">
+            <p className="eyebrow text-[#676258]">Selected work</p>
+            <h2 className="mt-5 text-4xl leading-[1.02] tracking-[-0.04em] sm:text-5xl">
+              Campaigns that feel premium,
+              <span className="block text-[#666056]">perform commercially, and scale with control.</span>
+            </h2>
           </div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-gray-500"
-          >
-            A curated snapshot of our client results — real numbers, real brands.
-          </motion.p>
-        </div>
+          <Link href="/case-studies" className="text-sm uppercase tracking-[0.2em] text-[#111111] underline decoration-black/20 underline-offset-8">
+            View all case studies
+          </Link>
+        </motion.div>
 
-        <div className="space-y-4">
+        <div className="mt-14 space-y-4">
           {portfolio.map((item, index) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
+              className="panel-light rounded-[2rem] p-6 sm:p-8"
             >
-              <TiltCard>
-                <div className="group relative glass-dark rounded-2xl p-6 md:p-8 overflow-hidden
-                  hover:border-[#FFB800]/20 hover:shadow-[0_0_60px_0_rgba(27,32,128,0.4)]
-                  transition-all duration-300"
-                >
-                  {/* Card inner glow on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none rounded-2xl"
-                    style={{ background: "radial-gradient(ellipse at top right, rgba(27,32,128,0.25), transparent 70%)" }} />
-
-                  <div className="flex flex-col md:flex-row gap-6 md:gap-12 md:items-center relative z-10">
-
-                    {/* ID number */}
-                    <div className="flex-shrink-0 font-heading font-bold text-5xl md:text-6xl text-white/10 group-hover:text-[#FFB800]/20 transition-colors duration-300 select-none">
-                      {item.id}
+              <div className="grid gap-8 lg:grid-cols-[90px_minmax(0,1fr)_minmax(240px,0.38fr)] lg:items-start">
+                <div className="text-4xl tracking-[-0.05em] text-[#8b867c]">{item.id}</div>
+                <div>
+                  <h3 className="text-2xl leading-tight text-[#111111]">{item.name}</h3>
+                  <p className="mt-2 text-sm uppercase tracking-[0.18em] text-[#706a5f]">{item.location}</p>
+                  <div className="mt-5 grid gap-4 text-sm leading-7 text-[#59544a] sm:grid-cols-2">
+                    <div>
+                      <p className="eyebrow text-[#847d72]">Spend</p>
+                      <p className="mt-2">{item.spend}</p>
                     </div>
-
-                    {/* Main info */}
-                    <div className="flex-grow space-y-4">
-                      <div>
-                        <h3 className="text-xl md:text-2xl font-bold font-heading text-white group-hover:text-[#FFB800] transition-colors duration-300">
-                          {item.name}
-                        </h3>
-                        <p className="text-sm text-gray-600 flex items-center gap-1.5 mt-1">
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                          {item.location}
-                        </p>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {item.services.split(", ").map((s, i) => (
-                          <span key={i} className="text-xs font-medium text-gray-500 border border-white/8 rounded-full px-3 py-1 bg-white/3">
-                            {s}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Result badge */}
-                    <div className="md:w-56 flex-shrink-0 relative">
-                      <div className="border border-[#FFB800]/20 rounded-xl p-5 bg-[#FFB800]/5 group-hover:border-[#FFB800]/40 group-hover:bg-[#FFB800]/10 transition-all duration-300">
-                        <p className="text-[10px] uppercase tracking-widest text-[#FFB800]/70 font-semibold mb-2">Key Result</p>
-                        <p className="text-base font-bold text-white leading-snug">{item.result}</p>
-                      </div>
-                      <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#FFB800] animate-glow-pulse opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div>
+                      <p className="eyebrow text-[#847d72]">Services</p>
+                      <p className="mt-2">{item.services}</p>
                     </div>
                   </div>
                 </div>
-              </TiltCard>
+                <div className="rounded-[1.75rem] border border-black/8 bg-black/[0.02] p-5">
+                  <p className="eyebrow text-[#7b7469]">Outcome</p>
+                  <p className="mt-3 text-xl leading-snug text-[#111111]">{item.result}</p>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12 text-center"
-        >
-          <Link
-            href="/case-studies"
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full border border-[#FFB800]/30 text-[#FFB800] text-sm font-semibold hover:bg-[#FFB800]/8 hover:border-[#FFB800]/60 transition-all duration-300"
-          >
-            View All Case Studies
-            <span className="transform translate-x-0 group-hover:translate-x-1.5 transition-transform duration-300">→</span>
-          </Link>
-        </motion.div>
       </div>
     </section>
   );

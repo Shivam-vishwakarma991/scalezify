@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import CountUp from "react-countup";
 import { useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -14,14 +14,7 @@ interface AnimatedCounterProps {
 
 export function AnimatedCounter({ value, suffix = "", prefix = "", className }: AnimatedCounterProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [hasTriggered, setHasTriggered] = useState(false);
-
-  useEffect(() => {
-    if (isInView && !hasTriggered) {
-      setHasTriggered(true);
-    }
-  }, [isInView, hasTriggered]);
+  const hasTriggered = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <div ref={ref} className={cn("inline-flex", className)}>

@@ -1,59 +1,52 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
+
+const team = [
+  { role: "Paid media", count: "2 specialists" },
+  { role: "SEO", count: "1 specialist" },
+  { role: "Creative", count: "1 specialist" },
+  { role: "Web", count: "1 specialist" },
+  { role: "Social", count: "1 specialist" },
+];
 
 export function Team() {
   return (
-    <section className="py-24 bg-white border-t border-gray-100">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl text-center">
+    <section className="relative overflow-hidden bg-[#0d0d0d] text-[var(--copy-strong)]">
+      <div className="relative z-10 mx-auto max-w-[1600px] px-4 py-24 sm:px-6 lg:px-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto space-y-6"
+          className="max-w-3xl"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-[#0D1040]">
-            The Team Behind Your Growth
+          <p className="eyebrow text-[var(--accent)]">The team</p>
+          <h2 className="mt-5 text-4xl leading-[1.02] tracking-[-0.04em] sm:text-5xl">
+            Small enough to stay accountable.
+            <span className="block text-[var(--copy-body)]">Specialised enough to cover the full funnel.</span>
           </h2>
-          <p className="text-lg text-gray-600 leading-relaxed">
-            Scalezify is built around a lean, high-performance team of 6 specialists — each one focused on a different layer of your growth engine. From paid media strategists and SEO experts to creative designers, web developers, and social media managers, every member of our team operates with one goal: measurable results for luxury travel brands.
+          <p className="mt-6 max-w-2xl text-base leading-8 text-[var(--copy-body)]">
+            Scalezify runs lean by design. Strategy, media buying, SEO, creative, web, and social execution sit close together so the brand doesn&apos;t get diluted between teams.
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-5xl mx-auto"
-        >
-          {[
-            { role: "Paid Media (Google & Meta Ads)", count: "2 specialists" },
-            { role: "SEO & Organic Growth", count: "3 specialist" },
-            { role: "Creative & Design", count: "3 specialist" },
-            { role: "Web Development", count: "3 specialist" },
-            { role: "Social Media", count: "2 specialist" }
-          ].map((member, index) => (
-            <div key={index} className="bg-[#F4F6FF] rounded-2xl p-6 text-center border border-gray-100 hover:border-[#1B2080]/20 hover:shadow-md transition-all">
-              <div className="w-12 h-12 mx-auto bg-white rounded-full flex items-center justify-center text-[#1B2080] font-bold shadow-sm mb-4">
-                {member.count.charAt(0)}
-              </div>
-              <h4 className="font-semibold text-[#0D1040] text-sm mb-1">{roleShortener(member.role)}</h4>
-              <p className="text-xs text-gray-500">{member.count}</p>
-            </div>
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+          {team.map((item, index) => (
+            <motion.div
+              key={item.role}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
+              className="panel-dark rounded-[1.75rem] p-5"
+            >
+              <p className="text-4xl tracking-[-0.05em] text-[var(--accent)]">0{index + 1}</p>
+              <p className="mt-6 text-xl">{item.role}</p>
+              <p className="mt-2 text-sm text-[var(--copy-body)]">{item.count}</p>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
-}
-
-function roleShortener(role: string) {
-  if (role.includes("Paid Media")) return "Paid Media";
-  if (role.includes("SEO")) return "SEO";
-  if (role.includes("Creative")) return "Design";
-  if (role.includes("Web Dev")) return "Web Dev";
-  if (role.includes("Social")) return "Social Media";
-  return role;
 }

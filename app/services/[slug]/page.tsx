@@ -1,15 +1,16 @@
-import { notFound } from "next/navigation";
-import { Header } from "@/components/sections/header";
-import { Footer } from "@/components/sections/footer";
-import { services } from "@/constants/data";
-import { siteConfig } from "@/constants/site";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Footer } from "@/components/sections/footer";
+import { Header } from "@/components/sections/header";
+import { Button } from "@/components/ui/button";
+import { services } from "@/constants/data";
+import { siteConfig } from "@/constants/site";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  const service = services.find(s => s.slug === resolvedParams.slug);
+  const service = services.find((item) => item.slug === resolvedParams.slug);
+
   if (!service) return { title: "Service Not Found" };
 
   return {
@@ -20,65 +21,57 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 export function generateStaticParams() {
-  return services.map((service) => ({
-    slug: service.slug,
-  }));
+  return services.map((service) => ({ slug: service.slug }));
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const service = services.find(s => s.slug === resolvedParams.slug);
+  const service = services.find((item) => item.slug === resolvedParams.slug);
 
-  if (!service) {
-    notFound();
-  }
+  if (!service) notFound();
 
   return (
     <>
       <Header />
-      <main className="flex-1 pt-24 bg-white min-h-[70vh]">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-16">
-          <div className="mb-8">
-            <Link href="/#services" className="text-[#FFB800] hover:underline text-sm font-medium">
-              ← Back to Services
-            </Link>
-          </div>
-          
-          <div className="w-16 h-16 rounded-2xl bg-[#F4F6FF] flex items-center justify-center text-3xl mb-8">
-            {service.icon}
-          </div>
-          
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-[#0D1040] mb-6">
-            {service.title}
-          </h1>
-          
-          <p className="text-xl text-gray-600 leading-relaxed mb-12">
-            {service.description}
-          </p>
+      <main className="flex-1 bg-[var(--surface-soft)] pt-28 text-[#111111]">
+        <div className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 lg:px-10">
+          <Link href="/#services" className="text-sm uppercase tracking-[0.2em] text-[#5f594f]">
+            Back to services
+          </Link>
 
-          {/* Dynamic service content */}
-          <div className="prose prose-lg max-w-none text-gray-700">
-            <p className="text-lg leading-relaxed">
-              {service.content}
-            </p>
-            
-            <h3 className="text-2xl font-bold font-heading text-[#0D1040] mt-12 mb-6">Our Approach</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose">
-              {service.features.map((feature, idx) => (
-                <div key={idx} className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100">
-                  <span className="text-[#FFB800] mt-0.5">✓</span>
-                  <span className="font-medium text-gray-800">{feature}</span>
-                </div>
-              ))}
+          <div className="mt-10 rounded-[2rem] border border-black/8 bg-white/50 p-8 shadow-[0_18px_50px_rgba(20,18,14,0.08)] sm:p-10">
+            <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-[#111111] text-3xl">
+              {service.icon}
             </div>
 
-            <div className="mt-16 p-8 bg-[#F4F6FF] rounded-2xl border border-[#1B2080]/10 flex flex-col md:flex-row items-center justify-between gap-6 not-prose">
-              <div>
-                <h3 className="text-2xl font-bold font-heading text-[#0D1040] mb-2">Ready to scale with {service.title}?</h3>
-                <p className="text-gray-600">Let's discuss how we can implement this for your luxury brand.</p>
+            <h1 className="mt-8 text-4xl leading-[1.02] tracking-[-0.04em] sm:text-6xl">{service.title}</h1>
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#5a544b]">{service.description}</p>
+
+            <div className="mt-12 border-t border-black/8 pt-10">
+              <p className="text-base leading-8 text-[#514c43]">{service.content}</p>
+
+              <h2 className="mt-12 text-2xl">Our approach</h2>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                {service.features.map((feature) => (
+                  <div key={feature} className="rounded-[1.5rem] border border-black/8 bg-black/[0.02] p-5">
+                    <p className="text-sm uppercase tracking-[0.18em] text-[#7b7469]">Focus area</p>
+                    <p className="mt-3 text-base leading-7 text-[#111111]">{feature}</p>
+                  </div>
+                ))}
               </div>
-              <Button asChild size="lg" className="shrink-0">
-                <Link href={siteConfig.contact.calendly} target="_blank">Book a Strategy Call</Link>
+            </div>
+          </div>
+
+          <div className="mt-10 rounded-[2rem] bg-[#090909] p-8 text-[var(--copy-strong)] sm:p-10">
+            <h2 className="text-3xl leading-tight">Ready to scale with {service.title}?</h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--copy-body)]">
+              Let&apos;s map the demand system, the current bottlenecks, and the commercial target before we recommend a channel mix.
+            </p>
+            <div className="mt-8">
+              <Button asChild size="lg">
+                <Link href={siteConfig.contact.calendly} target="_blank">
+                  Book a Strategy Call
+                </Link>
               </Button>
             </div>
           </div>

@@ -1,145 +1,98 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { withBasePath } from "@/constants/site";
 
-const credentials = ["3+ Years in Performance Marketing", "₹1Cr+ Total Ad Spend Managed", "Google Ads Specialist", "Luxury Travel Vertical Expert"];
+const credentials = [
+  "Performance-led luxury acquisition",
+  "Google Ads and Meta specialist",
+  "Direct lead generation focus",
+  "India-first market understanding",
+];
 
 export function Founder() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
-    <section className="py-28 bg-[#0D1040] text-white relative overflow-hidden grain">
-      {/* Background light beam effect */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div
-          className="absolute top-0 left-1/3 w-[600px] h-full"
-          style={{
-            background: "linear-gradient(to bottom, rgba(255,184,0,0.03) 0%, rgba(27,32,128,0.08) 50%, transparent 100%)",
-          }}
-        />
-        <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-[#FFB800]/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#FFB800]/20 to-transparent" />
-      </div>
-
-      <div ref={ref} className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24 items-center">
-
-          {/* Image — portrait with studio lighting effect */}
+    <section className="section-frame grain relative overflow-hidden bg-[#090909] text-[var(--copy-strong)]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(214,255,47,0.08),_transparent_35%)]" />
+      <div className="relative z-10 mx-auto max-w-[1600px] px-4 py-24 sm:px-6 lg:px-10">
+        <div className="grid gap-12 lg:grid-cols-[minmax(320px,0.85fr)_minmax(0,1.15fr)] lg:items-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.94, y: 20 }}
-            animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
-            transition={{ duration: 0.75, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="order-2 lg:order-1 relative"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative"
           >
-            {/* Studio light beam behind image */}
-            <div
-              className="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-[120%] pointer-events-none z-0"
-              style={{
-                background: "linear-gradient(to bottom, rgba(255,184,0,0.08) 0%, rgba(255,184,0,0.02) 60%, transparent 100%)",
-                filter: "blur(30px)",
-              }}
-            />
-
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden gradient-border shadow-2xl">
-              <img
-                src="/yashPal.jpeg"
-                alt="Yash Pal — Founder, Scalezify"
-                className="absolute inset-0 w-full h-full object-cover"
+            <div className="panel-dark relative aspect-[4/5] overflow-hidden rounded-[2rem]">
+              <Image
+                src={withBasePath("/yashPal.jpeg")}
+                alt="Yash Pal, founder of Scalezify"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover"
               />
-              {/* Vignette overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1040]/60 via-transparent to-transparent" />
-
-              {/* Name plate inside image at bottom */}
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="glass-dark rounded-xl px-4 py-3">
-                  <p className="text-white font-bold text-lg font-heading leading-tight">Yash Pal</p>
-                  <p className="text-[#FFB800] text-xs uppercase tracking-widest font-medium mt-0.5">Founder & Lead Strategist</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-6">
+                <div className="rounded-[1.5rem] border border-white/10 bg-black/45 px-5 py-4 backdrop-blur-sm">
+                  <p className="text-2xl">Yash Pal</p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.24em] text-[var(--accent)]">
+                    Founder & lead strategist
+                  </p>
                 </div>
               </div>
             </div>
-
-            {/* Floating accent element */}
-            <div className="absolute -right-5 top-1/3 w-12 h-12 rounded-full border border-[#FFB800]/20 animate-float" />
-            <div className="absolute -left-3 bottom-1/3 w-6 h-6 rounded-full bg-[#FFB800]/10 border border-[#FFB800]/30 animate-float-reverse" />
           </motion.div>
 
-          {/* Text column */}
-          <div className="order-1 lg:order-2 space-y-8">
-            <div className="space-y-2">
-              <motion.span
-                initial={{ opacity: 0, y: 8 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4 }}
-                className="text-xs font-bold text-[#FFB800] uppercase tracking-[0.25em]"
-              >
-                The Founder
-              </motion.span>
-
-              <div className="overflow-hidden">
-                <motion.h2
-                  initial={{ y: "100%", opacity: 0 }}
-                  animate={isInView ? { y: "0%", opacity: 1 } : {}}
-                  transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
-                  className="text-5xl md:text-6xl font-bold font-heading text-white"
-                >
-                  Yash Pal
-                </motion.h2>
-              </div>
-            </div>
-
-            {/* Pull quote */}
-            <motion.blockquote
-              initial={{ opacity: 0, x: -20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.65, delay: 0.25 }}
-              className="border-l-2 border-[#FFB800] pl-5 italic text-xl text-gray-300 leading-relaxed font-light"
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="eyebrow text-[var(--accent)]"
             >
-              "Luxury travel brands deserve a specialist agency — not a generalist one."
-            </motion.blockquote>
-
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.35 }}
-              className="space-y-4 text-gray-400 leading-relaxed text-sm md:text-base"
+              Founder note
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.06 }}
+              className="mt-5 max-w-3xl text-4xl leading-[1.03] tracking-[-0.04em] sm:text-5xl"
             >
-              <p>
-                Yash Pal is a performance marketer and growth strategist who has spent years working at the intersection of luxury hospitality, premium travel, and digital advertising.
-              </p>
-              <p>
-                Under his previous brand "Yash Pal & Team," Yash built a track record managing high-value ad campaigns for clients across Mumbai, Mysuru, Bengaluru, and Hong Kong. Today, through Scalezify, he leads a team dedicated entirely to scaling travel and transportation brands.
-              </p>
-            </motion.div>
+              Luxury travel brands deserve
+              <span className="block text-[var(--copy-body)]">a specialist agency, not a generic one.</span>
+            </motion.h2>
 
-            {/* Credential tags */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.45 }}
-              className="flex flex-wrap gap-2"
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.14 }}
+              className="mt-6 max-w-2xl text-base leading-8 text-[var(--copy-body)] sm:text-lg"
             >
-              {credentials.map((c, i) => (
+              Yash Pal built Scalezify around a simple belief: premium travel operators need sharper positioning, cleaner lead systems, and growth strategy that respects both perception and performance.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="mt-5 max-w-2xl text-sm leading-7 text-[var(--copy-body)]"
+            >
+              Under his earlier brand, Yash managed campaigns across Mumbai, Mysuru, Bengaluru, and Hong Kong. Scalezify narrows that experience into one category, one promise, and one mandate: help luxury brands build owned demand.
+            </motion.p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              {credentials.map((item) => (
                 <span
-                  key={i}
-                  className="text-xs font-medium text-gray-300 border border-white/15 rounded-full px-3 py-1.5 bg-white/5 hover:border-[#FFB800]/40 hover:text-[#FFB800] transition-colors duration-300"
+                  key={item}
+                  className="rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.18em] text-[var(--copy-body)]"
                 >
-                  {c}
+                  {item}
                 </span>
               ))}
-            </motion.div>
-
-            {/* Location */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="text-xs text-gray-600 uppercase tracking-widest flex items-center gap-2"
-            >
-              <span className="w-4 h-px bg-gray-700" />
-              Based in Bhopal — Serving clients across India & internationally
-            </motion.p>
+            </div>
           </div>
         </div>
       </div>
